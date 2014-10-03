@@ -6,6 +6,7 @@ class MainWindow(QtGui.QMainWindow):
     def __init__(self,root,parent=None):
         super(MainWindow,self).__init__(parent)
         self.root=root
+        self.setWindowTitle(root)
         self.setMinimumSize(QtCore.QSize(800,600))
         self.timer=QtCore.QTimer(self)
         self.timer.timeout.connect(self.update)
