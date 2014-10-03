@@ -1,6 +1,6 @@
 from PyQt4 import QtCore, QtGui
 import scanner
-
+import utils
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self,root,parent=None):
@@ -14,6 +14,7 @@ class MainWindow(QtGui.QMainWindow):
         self.fileTable.setColumnCount(3)
         self.fileTable.horizontalHeader().setResizeMode(2,QtGui.QHeaderView.Stretch)
         self.fileTable.setHorizontalHeaderLabels(['File','Status','Comment'])
+        self.fileTable.cellDoubleClicked.connect(self.doubleClickItem)
         self.dataDict={}
         self.update()
         self.setCentralWidget(self.fileTable)
@@ -24,18 +25,16 @@ class MainWindow(QtGui.QMainWindow):
         self.dock.setMinimumHeight(150)
         self.addDockWidget(QtCore.Qt.BottomDockWidgetArea,self.dock)
         self.dock.widget().show()
-        #self.createToolbar()
+        self.setupMenu()
         
-    def createToolbar(self):
-        tb=self.addToolBar('Actions')
-        tb.addAction('All').triggered.connect(self.selectAll)
-        tb.addAction('None').triggered.connect(self.selectNone)
-        tb.addAction('Commit').triggered.connect(self.commit)
-        return tb
+    def setupMenu(self):
+        m=self.menuBar().addMenu("&Settings")
+        m.addAction(QtGui.QAction('&General',self,triggered=self.generalSettings))
         
-    def editEnded(self,row,col):
-        if not self.updating:
-            print "Item changed: {},{}".format(row,col)
+    def generalSettings(self):
+        from tools import GeneralSettingsDialog
+        d=GeneralSettingsDialog()
+        d.exec_()
         
     def resizeEvent(self,event):
         s=event.size()
@@ -78,15 +77,14 @@ class MainWindow(QtGui.QMainWindow):
             self.fileTable.resizeColumnToContents(1)
         self.updating=False
         
-    def selectAll(self):
-        n=self.fileTable.rowCount()
-        for i in xrange(0,n):
-            self.fileTable.item(i,0).setCheckState(QtCore.Qt.Checked)
-            
-    def selectNone(self):
-        n=self.fileTable.rowCount()
-        for i in xrange(0,n):
-            self.fileTable.item(i,0).setCheckState(QtCore.Qt.Unchecked)
-            
-    def commit(self):
-        pass
+    def doubleClickItem(self,row,col):
+        if col==0:
+            s=QtCore.QSettings()
+            diff=str(s.value('diff').toString())
+            if diff:
+                #xterm=(s.value('xterm')=='True')
+                cmdlist=diff.split(' ')
+                filename=self.fileTable.item(row,col).text()
+                cmdlist.append("git diff {}".format(filename))
+                print cmdlist
+                utils.runcmd(self.root,cmdlist)
