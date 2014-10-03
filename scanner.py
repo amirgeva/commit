@@ -34,8 +34,6 @@ def scan(root,data):
             fileStatus=status
             if len(modifiers)>0:
                 fileStatus=status+" ("+','.join(modifiers)+")"
-
-            print "Adding {} [{}]".format(filename,fileStatus)
             comment=''
             if filename in data:
                 comment=(data.get(filename))[2]
