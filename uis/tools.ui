@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>toolsDialog</class>
+ <widget class="QDialog" name="toolsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>129</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Tools</string>
+  </property>
+  <widget class="QPushButton" name="selectAllButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>119</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select All</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="selectNoneButton">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>20</y>
+     <width>119</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select None</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="groupCommentButton">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>20</y>
+     <width>171</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Group Comment</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="autoCommitCB">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>271</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Auto commit on comment</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="commitButton">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>70</y>
+     <width>119</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Commit</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
