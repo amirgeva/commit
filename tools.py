@@ -85,7 +85,8 @@ class ToolsDialog(QtGui.QDialog):
         for i in xrange(0,n):
             if self.table.item(i,0).checkState()==QtCore.Qt.Checked:
                 checks=checks+1
-            if len(self.table.item(i,2).text())>0:
+            commentText=self.table.item(i,2).text()
+            if commentText and len(commentText)>0:
                 comments=comments+1
         self.groupCommentButton.setEnabled(checks>0)
         self.commitButton.setEnabled(comments>0)
