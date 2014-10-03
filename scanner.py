@@ -7,7 +7,6 @@ def scan(root,data):
       'Untracked files:':'Untracked'          
     }
     (out,err)=utils.call(root,'git','status','-u')
-    #open('dump.txt','w').write(out)
     lines=out.split('\n')
     n=len(lines)
     i=0
@@ -31,6 +30,9 @@ def scan(root,data):
                 filename=(filename[9:]).strip()
             if filename.startswith('modified:'):
                 filename=(filename[9:]).strip()
+            if filename.startswith('deleted:'):
+                filename=(filename[8:]).strip()
+                modifiers.append("Deleted")
             fileStatus=status
             if len(modifiers)>0:
                 fileStatus=status+" ("+','.join(modifiers)+")"
