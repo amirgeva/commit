@@ -2,8 +2,11 @@ from PyQt4 import QtCore, QtGui
 import uis
 import utils
 
-def commitFile(root,filename,comment):
-    utils.call(root,'git','add',filename)
+def commitFile(root,filename,status,comment):
+    cmd='add'
+    if status.find('Deleted')>=0:
+        cmd='rm'
+    utils.call(root,'git',cmd,filename)
     utils.call(root,'git','commit','-m',comment)
 
 class ToolsDialog(QtGui.QDialog):
@@ -63,10 +66,11 @@ class ToolsDialog(QtGui.QDialog):
     def commitClicked(self):
         n=self.table.rowCount()
         for i in xrange(0,n):
-            comment=self.table.item(i,2).text()
+            comment=str(self.table.item(i,2).text())
             if len(comment)>0:
-                filename=self.table.item(i,0).text()
-                commitFile(self.root,filename,comment)
+                filename=str(self.table.item(i,0).text())
+                status=str(self.table.item(i,1).text())
+                commitFile(self.root,filename,status,comment)
         self.updating=True
         self.mainWindow.update()
         self.updating=False
