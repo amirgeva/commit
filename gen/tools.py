@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'uis/tools.ui'
 #
-# Created: Fri Oct  3 16:38:34 2014
+# Created: Fri Oct  3 16:56:14 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -40,8 +40,11 @@ class Ui_toolsDialog(object):
         toolsDialog.autoCommitCB.setGeometry(QtCore.QRect(10, 70, 271, 27))
         toolsDialog.autoCommitCB.setObjectName(_fromUtf8("autoCommitCB"))
         toolsDialog.commitButton = QtGui.QPushButton(toolsDialog)
-        toolsDialog.commitButton.setGeometry(QtCore.QRect(390, 70, 119, 32))
+        toolsDialog.commitButton.setGeometry(QtCore.QRect(360, 60, 119, 32))
         toolsDialog.commitButton.setObjectName(_fromUtf8("commitButton"))
+        toolsDialog.pushButton = QtGui.QPushButton(toolsDialog)
+        toolsDialog.pushButton.setGeometry(QtCore.QRect(490, 60, 119, 32))
+        toolsDialog.pushButton.setObjectName(_fromUtf8("pushButton"))
 
         self.retranslateUi(toolsDialog)
         QtCore.QMetaObject.connectSlotsByName(toolsDialog)
@@ -53,4 +56,5 @@ class Ui_toolsDialog(object):
         toolsDialog.groupCommentButton.setText(_translate("toolsDialog", "Group Comment", None))
         toolsDialog.autoCommitCB.setText(_translate("toolsDialog", "Auto commit on comment", None))
         toolsDialog.commitButton.setText(_translate("toolsDialog", "Commit", None))
+        toolsDialog.pushButton.setText(_translate("toolsDialog", "Push", None))
 
