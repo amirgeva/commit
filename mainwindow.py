@@ -60,10 +60,6 @@ class MainWindow(QtGui.QMainWindow):
                     break
                 
         if modified:
-            print "New="
-            print newRows
-            print "Dict="
-            print self.dataDict
             self.dataDict={}
             self.fileTable.setRowCount(len(newRows))
             flags=[QtCore.Qt.ItemIsUserCheckable,0,QtCore.Qt.ItemIsEditable]
