@@ -9,7 +9,7 @@ class MainWindow(QtGui.QMainWindow):
         self.setMinimumSize(QtCore.QSize(800,600))
         self.timer=QtCore.QTimer(self)
         self.timer.timeout.connect(self.update)
-        #self.timer.start(2000)
+        self.timer.start(2000)
         self.fileTable=QtGui.QTableWidget(self)
         self.fileTable.setColumnCount(3)
         self.fileTable.horizontalHeader().setResizeMode(2,QtGui.QHeaderView.Stretch)
@@ -47,7 +47,7 @@ class MainWindow(QtGui.QMainWindow):
         self.updating=True
         newRows=scanner.scan(self.root,self.dataDict)
         modified=False
-        if len(newRows)<self.dataDict:
+        if len(newRows)<len(self.dataDict):
             modified=True
         else:
             for row in newRows:
@@ -60,6 +60,10 @@ class MainWindow(QtGui.QMainWindow):
                     break
                 
         if modified:
+            print "New="
+            print newRows
+            print "Dict="
+            print self.dataDict
             self.dataDict={}
             self.fileTable.setRowCount(len(newRows))
             flags=[QtCore.Qt.ItemIsUserCheckable,0,QtCore.Qt.ItemIsEditable]
