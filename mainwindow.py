@@ -1,10 +1,13 @@
 from PyQt4 import QtCore, QtGui
+import os
 import scanner
 import utils
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self,root,parent=None):
         super(MainWindow,self).__init__(parent)
+        datadir=os.path.dirname(os.path.abspath(__file__))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(datadir,'icon.png')))
         self.root=root
         self.setWindowTitle(root)
         self.setMinimumSize(QtCore.QSize(800,600))
@@ -86,5 +89,5 @@ class MainWindow(QtGui.QMainWindow):
                 #xterm=(s.value('xterm')=='True')
                 cmdlist=diff.split(' ')
                 filename=self.fileTable.item(row,col).text()
-                cmdlist.append("git diff {}".format(filename))
+                cmdlist.append("git diff {} ; read".format(filename))
                 utils.runcmd(self.root,cmdlist)
