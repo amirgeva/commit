@@ -23,6 +23,7 @@ class ToolsDialog(QtGui.QDialog):
         self.groupCommentButton.setDisabled(True)
         self.commitButton.clicked.connect(self.commitClicked)
         self.commitButton.setDisabled(True)
+        self.pushButton.clicked.connect(self.pushClicked)
         self.table.cellChanged.connect(self.tableCellChanged)
         self.updating=False
         
@@ -70,6 +71,10 @@ class ToolsDialog(QtGui.QDialog):
         self.mainWindow.update()
         self.updating=False
         self.tableCellChanged()
+        
+    def pushClicked(self):
+        (out,err)=utils.call(self.root,'git','push')
+        QtGui.QMessageBox.information(self,"Push",out)
     
     def tableCellChanged(self,row=0,col=0):
         if self.updating:
