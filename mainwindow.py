@@ -86,5 +86,4 @@ class MainWindow(QtGui.QMainWindow):
                 cmdlist=diff.split(' ')
                 filename=self.fileTable.item(row,col).text()
                 cmdlist.append("git diff {}".format(filename))
-                print cmdlist
                 utils.runcmd(self.root,cmdlist)
