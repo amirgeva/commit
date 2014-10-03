@@ -89,5 +89,5 @@ class MainWindow(QtGui.QMainWindow):
                 #xterm=(s.value('xterm')=='True')
                 cmdlist=diff.split(' ')
                 filename=self.fileTable.item(row,col).text()
-                cmdlist.append("git diff {} ; read".format(filename))
+                cmdlist.append("git diff {} ; echo Press Enter to close ; read".format(filename))
                 utils.runcmd(self.root,cmdlist)
