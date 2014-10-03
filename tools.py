@@ -86,3 +86,26 @@ class ToolsDialog(QtGui.QDialog):
         self.commitButton.setEnabled(comments>0)
         if comments>0 and self.autoCommitCB.checkState()==QtCore.Qt.Checked:
             self.commitClicked()
+
+
+
+
+class GeneralSettingsDialog(QtGui.QDialog):
+    def __init__(self,parent=None):
+        super(GeneralSettingsDialog,self).__init__(parent)
+        uis.loadDialog('general_settings',self)
+        s=QtCore.QSettings()
+        self.diffCmd.setText(s.value('diff').toString())
+        xterm=QtCore.Qt.Checked if s.value('xterm').toString()=='True' else QtCore.Qt.Unchecked
+        self.runInXTerm.setCheckState(xterm)
+
+    def accept(self):
+        s=QtCore.QSettings()
+        diff=self.diffCmd.text()
+        s.setValue('diff',diff)
+        xterm='True' if self.runInXTerm.checkState()==QtCore.Qt.Checked else 'False'
+        s.setValue('xterm',xterm)
+        s.sync()
+        super(GeneralSettingsDialog,self).accept()
+        
+        
