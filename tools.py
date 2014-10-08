@@ -10,6 +10,10 @@ def commitFile(root,filename,status,comment):
     utils.call(root,'git','commit','-m',comment)
 
 class ToolsDialog(QtGui.QDialog):
+    """
+    Dialog placed in a docking bar to provide means to perform actions on the
+    list of files in the central list widget
+    """
     def __init__(self,mainwin,table,parent=None):
         super(ToolsDialog,self).__init__(parent)
         uis.loadDialog('tools',self)
