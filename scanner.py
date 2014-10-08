@@ -1,6 +1,10 @@
 import utils
 
 def scan(root,data):
+    """
+    Scan the git status printout to find modified and untracked files
+    Returns a list of such files
+    """
     patterns={
       'Changes to be committed:':'Staged',
       'Changes not staged for commit:':'Modified',
