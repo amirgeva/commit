@@ -83,11 +83,14 @@ class MainWindow(QtGui.QMainWindow):
         
     def doubleClickItem(self,row,col):
         if col==0:
-            s=QtCore.QSettings()
-            diff=str(s.value('diff').toString())
-            if diff:
-                #xterm=(s.value('xterm')=='True')
-                cmdlist=diff.split(' ')
-                filename=self.fileTable.item(row,col).text()
-                cmdlist.append("git diff {} ; echo Press Enter to close ; read".format(filename))
-                utils.runcmd(self.root,cmdlist)
+            filename=self.fileTable.item(row,col).text()
+            if utils.checkFor('meld'):
+                utils.runcmd(self.root,['meld',filename])
+            else:
+                s=QtCore.QSettings()
+                diff=str(s.value('diff').toString())
+                if diff:
+                    #xterm=(s.value('xterm')=='True')
+                    cmdlist=diff.split(' ')
+                    cmdlist.append("git diff {} ; echo Press Enter to close ; read".format(filename))
+                    utils.runcmd(self.root,cmdlist)

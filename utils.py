@@ -27,6 +27,12 @@ def message(msg):
 def errorMessage(msg):
     message(msg)
 
+def checkFor(cmd):
+    try:
+        res=subprocess.call(['which',cmd],stdout=open('/dev/null','w'))
+        return res==0
+    except OSError:
+        return False
 
 def appendOutput(output,text):
     #text=output.toPlainText()
