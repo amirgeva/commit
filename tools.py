@@ -85,7 +85,7 @@ class ToolsDialog(QtWidgets.QDialog):
 
     def pushClicked(self):
         (out, err) = utils.call(self.root, 'git', 'push')
-        QtWidgets.QMessageBox.information(self, "Push", out + err)
+        QtWidgets.QMessageBox.information(self, "Push", out.decode('utf-8') + err.decode('utf-8'))
 
     def tableCellChanged(self, row=0, col=0):
         if self.updating:
